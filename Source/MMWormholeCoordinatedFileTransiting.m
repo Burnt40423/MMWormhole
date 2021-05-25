@@ -35,9 +35,12 @@
     if (messageObject) {
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:messageObject];
         NSString *filePath = [self filePathForIdentifier:identifier];
-        NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+        if (data == nil || filePath == nil) {
+            return NO;
+        }
         
-        if (data == nil || filePath == nil || fileURL == nil) {
+        NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+        if (fileURL == nil) {
             return NO;
         }
         
@@ -71,9 +74,12 @@
     }
     
     NSString *filePath = [self filePathForIdentifier:identifier];
-    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+    if (filePath == nil) {
+        return nil;
+    }
     
-    if (filePath == nil || fileURL == nil) {
+    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+    if (fileURL == nil) {
         return nil;
     }
     
@@ -81,13 +87,12 @@
     NSError *error = nil;
     __block NSData *data = nil;
     
-    [fileCoordinator
-     coordinateReadingItemAtURL:fileURL
-     options:0
-     error:&error
-     byAccessor:^(NSURL *newURL) {
-         data = [NSData dataWithContentsOfURL:newURL];
-     }];
+    [fileCoordinator coordinateReadingItemAtURL:fileURL
+                                        options:0
+                                          error:&error
+                                     byAccessor:^(NSURL *newURL) {
+        data = [NSData dataWithContentsOfURL:newURL];
+    }];
     
     if (data == nil) {
         return nil;
