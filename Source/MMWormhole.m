@@ -92,10 +92,6 @@ void wormholeNotificationCallback(CFNotificationCenterRef center,
                 self.wormholeMessenger = [[MMWormholeCoordinatedFileTransiting alloc] initWithApplicationGroupIdentifier:identifier
                                                                                                        optionalDirectory:directory];
                 break;
-            case MMWormholeTransitingTypeManifestFile:
-                self.wormholeMessenger = [[MMWormholeManifestFileTransiting alloc] initWithApplicationGroupIdentifier:identifier
-                                                                                                    optionalDirectory:directory];
-                break;
             case MMWormholeTransitingTypeSessionContext:
 #if ( defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000 )
                 self.wormholeMessenger = [[MMWormholeSessionContextTransiting alloc] initWithApplicationGroupIdentifier:identifier
@@ -179,22 +175,10 @@ void wormholeNotificationCallback(CFNotificationCenterRef center,
     NSString *identifier = [userInfo valueForKey:@"identifier"];
     
     if (identifier != nil) {
-#if ( defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000 && !TARGET_OS_SIMULATOR )
-        if ([self.wormholeMessenger respondsToSelector:@selector(numberOfMessageItemsforIdentifier:)]) {
-            NSInteger messageCount = [self.wormholeMessenger numberOfMessageItemsforIdentifier:identifier];
-            for (int i = 0; i < messageCount; i++) {
-                [self _sendNotificationForIdentifier:identifier];
-            }
-            return;
-        }
-#endif
-        [self _sendNotificationForIdentifier:identifier];
-    }
-}
+        id messageObject = [self.wormholeMessenger messageObjectForIdentifier:identifier];
 
-- (void)_sendNotificationForIdentifier:(NSString *)identifier {
-    id messageObject = [self.wormholeMessenger messageObjectForIdentifier:identifier];
-    [self notifyListenerForMessageWithIdentifier:identifier message:messageObject];
+        [self notifyListenerForMessageWithIdentifier:identifier message:messageObject];
+    }
 }
 
 - (id)listenerBlockForIdentifier:(NSString *)identifier {

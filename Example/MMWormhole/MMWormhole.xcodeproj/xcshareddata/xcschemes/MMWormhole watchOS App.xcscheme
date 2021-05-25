@@ -69,6 +69,8 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <Testables>
+      </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
@@ -78,8 +80,8 @@
             ReferencedContainer = "container:MMWormhole.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <Testables>
-      </Testables>
+      <AdditionalOptions>
+      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -91,8 +93,10 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.carousel"
+         RemotePath = "/MMWormhole">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "55E646E81B2659FB006ADC7F"
@@ -100,7 +104,18 @@
             BlueprintName = "watchOS"
             ReferencedContainer = "container:MMWormhole.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "55E646E81B2659FB006ADC7F"
+            BuildableName = "watchOS.app"
+            BlueprintName = "watchOS"
+            ReferencedContainer = "container:MMWormhole.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -108,8 +123,10 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.carousel"
+         RemotePath = "/MMWormhole">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "55E646E81B2659FB006ADC7F"
@@ -117,7 +134,16 @@
             BlueprintName = "watchOS"
             ReferencedContainer = "container:MMWormhole.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "55E646E81B2659FB006ADC7F"
+            BuildableName = "watchOS.app"
+            BlueprintName = "watchOS"
+            ReferencedContainer = "container:MMWormhole.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
